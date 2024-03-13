@@ -98,11 +98,11 @@ class AuthController extends Controller
     {
         // get token
         $token = JWTAuth::getToken();
-
+    
         // invalidate token
         $invalidate = JWTAuth::invalidate($token);
-
-        if($invalidate) {
+    
+        if($invalidate !== false) {
             return response()->json([
                 'meta' => [
                     'code' => 200,
@@ -111,6 +111,17 @@ class AuthController extends Controller
                 ],
                 'data' => [],
             ]);
+        } else {
+            // Handle case where token invalidation fails
+            return response()->json([
+                'meta' => [
+                    'code' => 403,
+                    'status' => 'error',
+                    'message' => 'Failed to invalidate token',
+                ],
+                'data' => [],
+            ], 403);
         }
     }
+    
 }

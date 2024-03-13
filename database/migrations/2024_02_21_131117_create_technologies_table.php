@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('fr_name');
             $table->text('en_description');
             $table->text('fr_description');
-            $table->string('picture');
+            $table->string('picture')->nullable()->default(null);
             $table->timestamps();
         });
     }

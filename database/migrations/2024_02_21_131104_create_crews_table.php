@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('fr_description');
             $table->string('en_job');
             $table->string('fr_job');
-            $table->string('picture');
+            $table->string('picture')->nullable()->default(null);
             $table->timestamps();
         });
     }

@@ -26,7 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // Public accessible API
 Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::get('destinations', [DestinationController::class, 'index']);
 Route::get('destinations/{destination}', [DestinationController::class, 'show']);
@@ -39,9 +39,14 @@ Route::get('technologies/{technology}', [TechnologyController::class, 'show']);
 // We use auth api here as a middleware so only authenticated user who can access the endpoint
 // We use group so we can apply middleware auth api to all the routes within the group
 Route::middleware('auth:api')->group(function() {
-    Route::get('/me', [UserController::class, 'me']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('destinations', [DestinationController::class, 'store']);
+    Route::post('destinations/{id}', [DestinationController::class, 'update']);
     Route::resource('destinations', DestinationController::class)->except(['index', 'show']);
     Route::resource('crews', CrewController::class)->except(['index', 'show']);
+    Route::post('crews', [CrewController::class, 'store']);
+    Route::post('crews/{id}', [CrewController::class, 'update']);
     Route::resource('technologies', TechnologyController::class)->except(['index', 'show']);
+    Route::post('technologies', [TechnologyController::class, 'store']);
+    Route::post('technologies/{id}', [TechnologyController::class, 'update']);
 });

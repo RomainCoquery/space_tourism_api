@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('distance');
             $table->string('distance_unit');
             $table->integer('duration');
-            $table->string('picture');
+            $table->string('picture')->nullable()->default(null);
             $table->string('en_duration_unit');
             $table->string('fr_duration_unit');
             $table->timestamps();

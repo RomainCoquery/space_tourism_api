@@ -15,10 +15,9 @@ class UserController extends Controller
         $this->user = $user;
     }
 
-    public function me() 
+    public function user() 
     {
         // use auth()->user() to get authenticated user data
-
         return response()->json([
             'meta' => [
                 'code' => 200,
